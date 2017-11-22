@@ -1,4 +1,4 @@
-Implementing Publish-Subscribe with Azure Service Bus and .NET Core
+Implementing Publish-Subscribe with Azure Service Bus and .NET Framework
 ==================================================================
 
 ## Introduction
