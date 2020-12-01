@@ -13,9 +13,9 @@ message delivery to one or more competing consumers. Therefore, messages are ret
 they were added to the queue. Also, each message is received and processed by only a single message consumer. Alternatively, topics provide a one-to-many form of messaging. Messages sent to topics are delivered to one or more associated subscriptions, which may have optional
 filters applied to restrict the incoming messages. Unlike queues, producers send messages to topics but consumers receive messages from subscriptions to the topics.
 
-In this lab, you walk through the process of implementing the Publish-Subscribe pattern in Azure Service Bus using topics. You create producers and consumer(s) using C#, the [.NET Framework](https://www.microsoft.com/net/download/windows) and the [Azure Service Bus .NET Client](https://www.nuget.org/packages/WindowsAzure.ServiceBus). By the end of this lab, you should feel comfortable with creating Azure Service Bus namespaces. You will also learn about sending and retrieving messages to topics, and moving troublesome messages to the dead-letter queue.
+In this lab, you walk through the process of implementing the Publish-Subscribe pattern in Azure Service Bus using topics. You create producers and consumer(s) using C#, the [.NET Framework](https://www.microsoft.com/net/download/windows?WT.mc_id=academic-0000-cephilli) and the [Azure Service Bus .NET Client](https://www.nuget.org/packages/WindowsAzure.ServiceBus). By the end of this lab, you should feel comfortable with creating Azure Service Bus namespaces. You will also learn about sending and retrieving messages to topics, and moving troublesome messages to the dead-letter queue.
 
-The lab also assumes that you are using the [Visual Studio IDE](https://www.visualstudio.com/vs) on Windows. Also, you should have already signed up for a [Microsoft Azure account](https://azure.microsoft.com/en-us/free). Included with this lab, you will find a starter solution in the **start** folder, which has the basic setup required for you to get started. Also,
+The lab also assumes that you are using the [Visual Studio IDE](https://www.visualstudio.com/vs?WT.mc_id=academic-0000-cephilli) on Windows. Also, you should have already signed up for a [Microsoft Azure account](https://azure.microsoft.com/free?WT.mc_id=academic-0000-cephilli). Included with this lab, you will find a starter solution in the **start** folder, which has the basic setup required for you to get started. Also,
 if you ever get stuck, feel free to review the completed solution inside of the **final** folder.
 
 <a name="Exercises"></a>
@@ -37,7 +37,7 @@ scope your messaging components. Within a namespace, you can create a many topic
 
 ### Steps
 
-1. Go to the [Azure portal](https://portal.azure.com), and sign in with your account.
+1. Go to the [Azure portal](https://portal.azure.com/?WT.mc_id=academic-0000-cephilli), and sign in with your account.
 2. In the left navigation, click **New** to open up the market place.
 3. Now choose **Enterprise Integration** and then **Service Bus**
 4. When the **Create namespace** sections opens, enter a name for your namespace.
@@ -63,7 +63,7 @@ inside of the Azure portal are all viable options. In this lab, we will create t
 
 <a name="Exercise3" ></a>
 ## 3. Add shared access signatures
-[Share Access Signatures](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-sas) (or SAS keys)
+[Share Access Signatures](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-sas?WT.mc_id=academic-0000-cephilli) (or SAS keys)
 is a way to control who has access to your Service Bus instance. SAS keys in
 Service Bus are SHA-256 secure hashes, and are paired with Shared Access policies.
 Together, they enable applications to be authorized on the namespace level or on the individual queue/topic with specific permissions. The available permissions today are:
@@ -96,7 +96,7 @@ and [WindowsAzure.ServiceBus](https://www.nuget.org/packages/WindowsAzure.Servic
 for ServicebusConifg containing placeholders for TopicName and ConnectionString.
 4. Copy and paste the connection string for the **SenderPolicy** policy next to ConnectionString key, and also enter the name of your topic next to the TopiceName key.
 5. Open the **ServicebusPublisher.cs** file.
-6. First you will implement the constructor. To send messages to a topic in Azure Service Bus, you will need an instance of the [TopicClient](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.topicclient?view=azure-dotnet). To create the TopicClient, you use the MessagingFactory class along with the topic name and the connection string that was generated in the portal.
+6. First you will implement the constructor. To send messages to a topic in Azure Service Bus, you will need an instance of the [TopicClient](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.topicclient?view=azure-dotnet&WT.mc_id=academic-0000-cephilli). To create the TopicClient, you use the MessagingFactory class along with the topic name and the connection string that was generated in the portal.
 
 ```
 public ServicebusPublisher(string connectionString, string topicName)
@@ -106,7 +106,7 @@ public ServicebusPublisher(string connectionString, string topicName)
 }
 ```
 
-7. Next, you implement the **Publish** method. To send messages into Azure Service Bus, we will need to populate an instance of the [BrokerdMessage](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage?view=azure-dotnet)
+7. Next, you implement the **Publish** method. To send messages into Azure Service Bus, we will need to populate an instance of the [BrokerdMessage](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage?view=azure-dotnet&WT.mc_id=academic-0000-cephilli)
 class. You can use this class to set things like the payload in the message body and metadata properties in the message header.
 
 The recommend way to create to the message payload is for you to take control of serializing your data and creating a stream
@@ -151,7 +151,7 @@ the name of your topic next to the TopiceName key.
 thrown if you try to create an already existing subscription, so we'll just do a check to see if it's there before creating.
 
 To receive messages on a topic in Azure Service Bus, we need an instance of
-the [SubscriptionClient](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.SubscriptionClient?view=azure-dotnet).
+the [SubscriptionClient](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.SubscriptionClient?view=azure-dotnet&WT.mc_id=academic-0000-cephilli).
 To create the SubscriptionClient, we use the MessagingFactory class along with the topic name and the connection string that was generated in the portal.
 
 ```
@@ -179,7 +179,7 @@ public OrderListener(string connectionString, string topicName, string subscript
 
 7. The **Listen** method is responsible for retrieving messages from the topic subscriptions and processing them. You will use the OnMessage method, which acts like a message pump. It invokes the
 callback that it's provided to handle the message processing. OnMessage also has an overload that takes an instance of
-[OnMessageOptions](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.onmessageoptions?view=azure-dotnet).
+[OnMessageOptions](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.onmessageoptions?view=azure-dotnet&WT.mc_id=academic-0000-cephilli).
 We can use this class to set various options that define with how the message pump processes messages. In the code below,
 we're setting the number of concurrent calls and also turning off auto-completion.
 
@@ -247,7 +247,7 @@ At this point, a fair amount of code has been written. Let's execute what has be
 ## 7. Handle unsupported messages with the dead-letter queue
 Sometimes messages sent to the topic might not be deliverable or able  to be processed by one of the available receivers.
 This could happen for any number of reasons; the message might be serialized using an unsupported format for example. Azure Service Bus provides a
-subqueue called the [dead-letter queue](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-dead-letter-queues)
+subqueue called the [dead-letter queue](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-dead-letter-queues?WT.mc_id=academic-0000-cephilli)
 to hold these types of messages. Instead of discarding the messages, they can be placed in the dead-letter queue. Then, those messages can be inspected
 by some other means and processed accordingly. The dead-letter queue is not something you have to manage. It is explicitly created for each topic or subscription respectively.
 
@@ -287,6 +287,6 @@ that you should try implementing for yourself.
 In the lab, you've gained some experience with working with Azure Service Bus, the .NET SDK,  and implementing the Publish-Subscribe pattern.
 Take a look at the following links for documentation and samples. You can go through them to learn more about what you can do with Azure Service Bus.
 
-* [Azure Service Bus Messaging Documentation](https://docs.microsoft.com/azure/service-bus-messaging/)
-* [Getting started with Service Bus topics](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-dotnet-how-to-use-topics-subscriptions)
+* [Azure Service Bus Messaging Documentation](https://docs.microsoft.com/azure/service-bus-messaging/?WT.mc_id=academic-0000-cephilli)
+* [Getting started with Service Bus topics](https://docs.microsoft.com/azure/service-bus-messaging/service-bus-dotnet-how-to-use-topics-subscriptions?WT.mc_id=academic-0000-cephilli)
 * [Azure Service Bus .NET Framework samples](https://github.com/Azure/azure-service-bus/tree/master/samples/DotNet/Microsoft.ServiceBus.Messaging)
